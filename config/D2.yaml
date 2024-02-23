@@ -1,0 +1,43 @@
+dataset: dataset_name_D2
+path:
+    case_dir: data/D2/cases.csv
+    graph_dir: data/D2/graphs_info/ # just for node_hash to map the pod to id
+    sample_dir: data/D2/samples/
+
+feat_dim:
+    metric: 256
+    trace: 2
+    log: 8
+
+train_samples_num: whole # Number of training samples. Choose 'whole' if all samples are selected.
+
+model_param:
+    num_layers: 2 # The number of layers of the encoder/decoder.
+    in_dim: 266
+    hidden_dim: 64
+    out_dim: 32
+    noise_rate: 0.5
+    epochs: 1000
+    batch_size: 128
+    learning_rate: 0.001
+    norm: none
+    aug_multiple: 1
+    feat_span: # Dimension initiation for different types of features. Only required when selecting ModalLoss function.
+        -
+            - 0
+            - 255
+        - 
+            - 256
+            - 257
+        -
+            - 258
+            - 265
+
+feedback:
+    frozen: True
+    epochs: 50
+    batch_size: 4
+    window_size: 10
+    learning_rate: 0.01
+    sample_num: 0.3 # The integer type indicates the number of samples for feedback, and the float type indicates the sample proportion.
+    mask_rate: 0 # The probability of randomly masking node features when feedback.
